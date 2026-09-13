@@ -1,0 +1,120 @@
+{
+  "dataset_rows": 25000,
+  "components": 25000,
+  "classification_target": "Warning vs Normal",
+  "before_smote": {
+    "normal": 20777,
+    "warning": 4223,
+    "warning_pct": 16.892
+  },
+  "after_smote": {
+    "normal": 16622,
+    "warning": 16622
+  },
+  "catboost": {
+    "accuracy": 0.9676,
+    "precision": 0.8502564102564103,
+    "recall": 0.9810650887573964,
+    "f1": 0.910989010989011,
+    "roc_auc": 0.995715150349974
+  },
+  "rul_random_forest": {
+    "mae_h": 13.753162625449553,
+    "rmse_h": 17.80784145998217,
+    "r2": 0.9543280278350619
+  },
+  "isolation_forest": {
+    "test_anomaly_rate_pct": 18.32,
+    "mean_anomaly_score": 0.457743140774552
+  },
+  "fisher": {
+    "method": "Linear Discriminant Analysis (Fisher discriminant)",
+    "n_components": 1
+  },
+  "data_leakage": {
+    "excluded_targets": [
+      "Risk",
+      "Failure_Time_h",
+      "RUL_at_168h",
+      "Failure_Flag_168h"
+    ],
+    "split_unit": "component row (one row per component in this dataset)"
+  },
+  "distribution": {
+    "value_0h": {
+      "mean": 19.492706000000002,
+      "std": 1.6321850785891994,
+      "min": 13.245,
+      "median": 19.494500000000002,
+      "max": 26.138
+    },
+    "value_24h": {
+      "mean": 19.9948044,
+      "std": 1.642723848456073,
+      "min": 12.953,
+      "median": 19.997,
+      "max": 27.516
+    },
+    "value_96h": {
+      "mean": 23.8166388,
+      "std": 2.299047344645664,
+      "min": 16.697,
+      "median": 23.682499999999997,
+      "max": 34.011
+    },
+    "value_168h": {
+      "mean": 29.79708396,
+      "std": 4.204376361799023,
+      "min": 19.644,
+      "median": 28.998,
+      "max": 45.538
+    },
+    "drift_0_24_per_h": {
+      "mean": 0.020920489200000003,
+      "std": 0.01951586581234406,
+      "min": -0.0562,
+      "median": 0.02081,
+      "max": 0.09341
+    },
+    "drift_24_96_per_h": {
+      "mean": 0.0530811088,
+      "std": 0.020789982169518734,
+      "min": 0.00611,
+      "median": 0.0483,
+      "max": 0.12534
+    },
+    "drift_96_168_per_h": {
+      "mean": 0.0830617396,
+      "std": 0.0319022457956374,
+      "min": 0.02364,
+      "median": 0.074955,
+      "max": 0.19087
+    },
+    "delta_0_168": {
+      "mean": 10.30437796,
+      "std": 3.9134401784398656,
+      "min": 3.9869999999999983,
+      "median": 9.274000000000001,
+      "max": 23.166
+    },
+    "curvature": {
+      "mean": 0.06214125040000001,
+      "std": 0.02976840552645041,
+      "min": -0.04376000000000001,
+      "median": 0.05931,
+      "max": 0.18075
+    },
+    "relative_growth": {
+      "mean": 0.5328365389312923,
+      "std": 0.20942094681535706,
+      "min": 0.19084005250328134,
+      "median": 0.47963020300675596,
+      "max": 1.4218496085093808
+    }
+  },
+  "rul_range_h": {
+    "min": 72,
+    "max": 336,
+    "mean": 203.77824
+  }
+}

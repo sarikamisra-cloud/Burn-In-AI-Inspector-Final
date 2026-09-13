@@ -1,0 +1,12 @@
+[
+  "value_0h",
+  "value_24h",
+  "value_96h",
+  "value_168h",
+  "drift_0_24_per_h",
+  "drift_24_96_per_h",
+  "drift_96_168_per_h",
+  "delta_0_168",
+  "curvature",
+  "relative_growth"
+]
