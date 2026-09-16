@@ -60,7 +60,7 @@ import {
 import './styles.css';
 
 // Real ML backend (Python/FastAPI). Set VITE_ML_API_URL for deployment.
-const ML_API = import.meta.env.VITE_ML_API_URL || 'http://127.0.0.1:8000';
+const ML_API = import.meta.env.VITE_ML_API_URL || '';
 
 async function runMLSingle(component) {
   const row = {
