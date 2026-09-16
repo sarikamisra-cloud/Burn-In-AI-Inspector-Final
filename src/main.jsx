@@ -115,6 +115,7 @@ async function saveComponentsToMongo(dataset) {
 
 async function runMLBatch(dataset) {
   if (!dataset?.length) return [];
+
   const rows = dataset.map(c => ({
     Component_ID: c.id,
     Lot_ID: c.lot,
@@ -134,14 +135,28 @@ async function runMLBatch(dataset) {
     health_score_pct: Number(c.raw168?.health_score_pct ?? 0),
     anomaly_score: Number(c.raw168?.source_anomaly_score ?? 0)
   }));
-  const response = await fetch(`${ML_API}/api/predict-batch`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ rows })
-  });
-  if (!response.ok) throw new Error(`ML backend returned ${response.status}`);
-  const payload = await response.json();
-  return payload.results || [];
+
+  const BATCH_SIZE = 5000;
+  const allResults = [];
+
+  for (let i = 0; i < rows.length; i += BATCH_SIZE) {
+    const batch = rows.slice(i, i + BATCH_SIZE);
+
+    const response = await fetch(`${ML_API}/api/predict-batch`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ rows: batch })
+    });
+
+    if (!response.ok) {
+      throw new Error(`ML backend returned ${response.status}`);
+    }
+
+    const payload = await response.json();
+    allResults.push(...(payload.results || []));
+  }
+
+  return allResults;
 }
 
 // Burn-in physical inspection stages in hours
