@@ -191,6 +191,6 @@ def save_components(components: list[dict[str, Any]]):
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
-@app.get("/metrics")
+@app.get("/api/metrics")
 def get_metrics():
     return metrics
