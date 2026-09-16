@@ -145,7 +145,7 @@ def _predict(frame: pd.DataFrame) -> list[dict[str, Any]]:
     return out
 
 
-@app.post("/predict")
+@app.post("/api/predict")
 def predict(payload: dict[str, Any]):
     try:
         frame = pd.DataFrame([payload])
@@ -154,7 +154,7 @@ def predict(payload: dict[str, Any]):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@app.post("/predict-batch")
+@app.post("/api/predict-batch")
 def predict_batch(payload: dict[str, Any]):
     try:
         rows = payload.get("rows")

@@ -82,7 +82,7 @@ async function runMLSingle(component) {
     health_score_pct: Number(component.raw168?.health_score_pct ?? 0),
     anomaly_score: Number(component.raw168?.source_anomaly_score ?? 0)
   };
-  const response = await fetch(`${ML_API}/predict`, {
+  const response = await fetch(`${ML_API}/api/predict`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(row)
@@ -134,7 +134,7 @@ async function runMLBatch(dataset) {
     health_score_pct: Number(c.raw168?.health_score_pct ?? 0),
     anomaly_score: Number(c.raw168?.source_anomaly_score ?? 0)
   }));
-  const response = await fetch(`${ML_API}/predict-batch`, {
+  const response = await fetch(`${ML_API}/api/predict-batch`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ rows })
@@ -814,7 +814,7 @@ useEffect(() => {
     setMlStatus('running');
     setMlError('');
     setMlResults({});
-    fetch(`${ML_API}/metrics`)
+    fetch(`${ML_API}/api/metrics`)
       .then(r => r.ok ? r.json() : Promise.reject(new Error('Metrics unavailable')))
       .then(m => { if (!cancelled) setMlMetrics(m); })
       .catch(() => {});
